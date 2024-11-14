@@ -4,102 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Solar System</title>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: black;
-    overflow: hidden;
-}
-
-.solar-system {
-    position: relative;
-    width: 800px;
-    height: 800px;
-}
-
-.sun {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(#ffd700, #ff8c00);
-    transform: translate(-50%, -50%);
-    box-shadow: 0 0 60px #ff8c00;
-}
-
-.orbit {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.planet {
-    position: absolute;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.planet-info {
-    position: absolute;
-    color: white;
-    background: rgba(0, 0, 0, 0.8);
-    padding: 10px;
-    border-radius: 4px;
-    width: 120px;
-    text-align: center;
-    visibility: hidden;
-    transform: translateX(-40px);
-    top: -80px;
-}
-
-.planet:hover .planet-info {
-    visibility: visible;
-}
-
-/* Mercury */
-.mercury-orbit {
-    width: 160px;
-    height: 160px;
-    animation: orbit 3s linear infinite;
-}
-.mercury {
-    width: 20px;
-    height: 20px;
-    background: #808080;
-    left: 100%;
-}
-
-/* Venus */
-.venus-orbit {
-    width: 220px;
-    height: 220px;
-    animation: orbit 7s linear infinite;
-}
-.venus {
-    width: 28px;
-    height: 28px;
-    background: #d2691e;
-    left: 100%;
-}
-
-/* Earth */
-.earth-orbit {
-    width: 280px;
-    height: 280px;
-    animation: orbit 10s linear infinite;
-}
-.earth {
-    width: 30px;
-    height: 30px;
-    background: #4169e1;
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: black;
+            overflow: hidden;
+        }
+        .solar-system {
+            position: relative;
+            width: 800px;
+            height: 800px;
+        }
+        .sun {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: radial-gradient(#ffd700, #ff8c00);
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 60px #ff8c00;
+        }
+        .orbit {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .planet-info {
+            position: absolute;
+            color: white;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 4px;
+            width: 120px;
+            text-align: center;
+            visibility: hidden;
+            transform: translateX(-40px);
+            top: -80px;
+        }
+        .planet:hover .planet-info {
+            visibility: visible;
+        }
+        .mercury-orbit {
+            width: 160px;
+            height: 160px;
+            animation: orbit 3s linear infinite;
+        }
+        .mercury {
+            width: 20px;
+            height: 20px;
+            background: #808080;
+            left: 100%;
+        }
+        .venus-orbit {
+            width: 220px;
+            height: 220px;
+            animation: orbit 7s linear infinite;
+        }
+        .venus {
+            width: 28px;
+            height: 28px;
+            background: #d2691e;
+            left: 100%;
+        }
+        .earth-orbit {
+            width: 280px;
+            height: 280px;
+            animation: orbit 10s linear infinite;
+        }
+        .earth {
+            width: 30px;
+            height: 30px;
+            background: #4169e1;
     left: 100%;
 }
 
@@ -187,7 +176,7 @@
         transform: translate(-50%, -50%) rotate(360deg);
     }
 }
-
+    </style>
 </head>
 <body>
     <div class="solar-system">
