@@ -20,49 +20,128 @@
         .planet {
             position: absolute;
             border-radius: 50%;
+            transition: transform 0.5s;
+        }
+        #sun {
+            background-color: yellow;
+            width: 100px;
+            height: 100px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        #mercury {
+            background-color: gray;
+            width: 30px;
+            height: 30px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
             animation: orbit 10s linear infinite;
+        }
+        #venus {
+            background-color: orange;
+            width: 50px;
+            height: 50px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 20s linear infinite;
+        }
+        #earth {
+            background-color: blue;
+            width: 60px;
+            height: 60px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 30s linear infinite;
+        }
+        #mars {
+            background-color: red;
+            width: 40px;
+            height: 40px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 40s linear infinite;
+        }
+        #jupiter {
+            background-color: brown;
+            width: 80px;
+            height: 80px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 50s linear infinite;
+        }
+        #saturn {
+            background-color: gold;
+            width: 70px;
+            height: 70px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 60s linear infinite;
+        }
+        #uranus {
+            background-color: lightblue;
+            width: 50px;
+            height: 50px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 70s linear infinite;
+        }
+        #neptune {
+            background-color: darkblue;
+            width: 50px;
+            height: 50px;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 80s linear infinite;
+        }
+        #moon {
+            background-color: gray;
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 250px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: orbit 5s linear infinite;
         }
         @keyframes orbit {
             0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
             100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
         }
-        #earth {
-            animation-duration: 10s;
-        }
-        #moon {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: gray;
-            border-radius: 50%;
-            animation: orbit 2s linear infinite;
-        }
     </style>
 </head>
 <body>
-    <h1>Welcome to the Solar System</h1>
+    <h1>Interactive Solar System</h1>
     <div id="solar-system">
-        <div id="sun" class="planet" style="background-color: yellow; width: 100px; height: 100px; top: 250px; left: 50%; transform: translateX(-50%);">Sun</div>
-        <div id="mercury" class="planet" style="background-color: gray; width: 30px; height: 30px; top: 250px; left: 50%; transform: translateX(-50%);">Mercury</div>
-        <div id="venus" class="planet" style="background-color: orange; width: 40px; height: 40px; top: 250px; left: 50%; transform: translateX(-50%);">Venus</div>
-        <div id="earth" class="planet" style="background-color: blue; width: 50px; height: 50px; top: 250px; left: 50%; transform: translateX(-50%);">Earth</div>
-        <div id="moon" style="background-color: gray; width: 20px; height: 20px; top: 250px; left: 50%; transform: translateX(-50%);">Moon</div>
-        <div id="mars" class="planet" style="background-color: red; width: 40px; height: 40px; top: 250px; left: 50%; transform: translateX(-50%);">Mars</div>
-        <div id="jupiter" class="planet" style="background-color: brown; width: 80px; height: 80px; top: 250px; left: 50%; transform: translateX(-50%);">Jupiter</div>
-        <div id="saturn" class="planet" style="background-color: gold; width: 70px; height: 70px; top: 250px; left: 50%; transform: translateX(-50%);">Saturn</div>
-        <div id="uranus" class="planet" style="background-color: lightblue; width: 60px; height: 60px; top: 250px; left: 50%; transform: translateX(-50%);">Uranus</div>
-        <div id="neptune" class="planet" style="background-color: darkblue; width: 60px; height: 60px; top: 250px; left: 50%; transform: translateX(-50%);">Neptune</div>
+        <div id="sun" class="planet"></div>
+        <div id="mercury" class="planet"></div>
+        <div id="venus" class="planet"></div>
+        <div id="earth" class="planet"></div>
+        <div id="moon" class="planet"></div>
+        <div id="mars" class="planet"></div>
+        <div id="jupiter" class="planet"></div>
+        <div id="saturn" class="planet"></div>
+        <div id="uranus" class="planet"></div>
+        <div id="neptune" class="planet"></div>
     </div>
     <div>
         <h2>Planet Descriptions</h2>
         <p><strong>Mercury:</strong> The closest planet to the Sun.</p>
-        <p><strong>Venus:</strong> Known for its thick, toxic atmosphere.</p>
-        <p><strong>Earth:</strong> The only planet known to support life.</p>
-        <p><strong>Mars:</strong> The red planet, known for its iron oxide.</p>
+        <p><strong>Venus:</strong> The second planet, known for its thick atmosphere.</p>
+        <p><strong>Earth:</strong> Our home planet, the only one known to support life.</p>
+        <p><strong>Mars:</strong> The red planet, known for its iron oxide surface.</p>
         <p><strong>Jupiter:</strong> The largest planet in our solar system.</p>
-        <p><strong>Saturn:</strong> Famous for its stunning rings.</p>
-        <p><strong>Uranus:</strong> An ice giant with a unique tilt.</p>
-        <p><strong>Neptune:</strong> The farthest planet from the Sun.</p>
+        <p><strong>Saturn:</strong> Known for its stunning rings.</p>
+        <p><strong>Uranus:</strong> The tilted planet, unique in its rotation.</p>
+        <p><strong>Neptune:</strong> The farthest planet from the Sun, known for its deep blue color.</p>
     </div>
 </body>
 </html>
