@@ -3,87 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Solar System</title>
+    <title>Complete Solar System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="solar-system">
-        <div class="sun">
-            <div class="glow"></div>
-        </div>
+        <div class="sun"></div>
         
+        <!-- Mercury -->
         <div class="orbit mercury-orbit">
-            <div class="planet mercury" data-planet="mercury">
-                <div class="tooltip">
+            <div class="planet mercury">
+                <div class="planet-info">
                     <h3>Mercury</h3>
-                    <p>Smallest planet, closest to Sun<br>Temperature: -180°C to 430°C<br>Distance from Sun: 57.9M km</p>
+                    <p>Smallest planet, closest to Sun<br>
+                    Distance: 57.9M km<br>
+                    Temperature: 430°C to -180°C</p>
                 </div>
             </div>
         </div>
 
+        <!-- Venus -->
         <div class="orbit venus-orbit">
-            <div class="planet venus" data-planet="venus">
-                <div class="tooltip">
+            <div class="planet venus">
+                <div class="planet-info">
                     <h3>Venus</h3>
-                    <p>Second planet from Sun<br>Temperature: 462°C<br>Distance from Sun: 108.2M km</p>
+                    <p>Hottest planet<br>
+                    Distance: 108.2M km<br>
+                    Temperature: 462°C</p>
                 </div>
             </div>
         </div>
 
+        <!-- Earth System -->
         <div class="orbit earth-orbit">
-            <div class="planet earth" data-planet="earth">
+            <div class="earth-system">
+                <div class="planet earth">
+                    <div class="planet-info">
+                        <h3>Earth</h3>
+                        <p>Our home planet<br>
+                        Distance: 149.6M km<br>
+                        Temperature: 15°C avg</p>
+                    </div>
+                </div>
                 <div class="moon-orbit">
                     <div class="moon"></div>
                 </div>
-                <div class="tooltip">
-                    <h3>Earth</h3>
-                    <p>Our home planet<br>Temperature: -88°C to 58°C<br>Distance from Sun: 149.6M km</p>
-                </div>
             </div>
         </div>
 
+        <!-- Mars -->
         <div class="orbit mars-orbit">
-            <div class="planet mars" data-planet="mars">
-                <div class="tooltip">
+            <div class="planet mars">
+                <div class="planet-info">
                     <h3>Mars</h3>
-                    <p>The Red Planet<br>Temperature: -140°C to 20°C<br>Distance from Sun: 227.9M km</p>
+                    <p>The Red Planet<br>
+                    Distance: 227.9M km<br>
+                    Temperature: -63°C avg</p>
                 </div>
             </div>
         </div>
 
+        <!-- Jupiter -->
         <div class="orbit jupiter-orbit">
-            <div class="planet jupiter" data-planet="jupiter">
-                <div class="tooltip">
+            <div class="planet jupiter">
+                <div class="planet-info">
                     <h3>Jupiter</h3>
-                    <p>Largest planet<br>Temperature: -110°C<br>Distance from Sun: 778.5M km</p>
+                    <p>Largest planet<br>
+                    Distance: 778.5M km<br>
+                    Temperature: -110°C avg</p>
                 </div>
             </div>
         </div>
 
+        <!-- Saturn -->
         <div class="orbit saturn-orbit">
-            <div class="planet saturn" data-planet="saturn">
-                <div class="rings"></div>
-                <div class="tooltip">
-                    <h3>Saturn</h3>
-                    <p>Known for its rings<br>Temperature: -140°C<br>Distance from Sun: 1.4B km</p>
+            <div class="saturn-system">
+                <div class="planet saturn">
+                    <div class="saturn-rings"></div>
+                    <div class="planet-info">
+                        <h3>Saturn</h3>
+                        <p>Ring system planet<br>
+                        Distance: 1.4B km<br>
+                        Temperature: -140°C avg</p>
+                    </div>
                 </div>
             </div>
         </div>
 
+        <!-- Uranus -->
         <div class="orbit uranus-orbit">
-            <div class="planet uranus" data-planet="uranus">
-                <div class="tooltip">
+            <div class="planet uranus">
+                <div class="planet-info">
                     <h3>Uranus</h3>
-                    <p>Ice giant<br>Temperature: -195°C<br>Distance from Sun: 2.9B km</p>
+                    <p>Ice giant<br>
+                    Distance: 2.9B km<br>
+                    Temperature: -195°C avg</p>
                 </div>
             </div>
         </div>
-
         <div class="orbit neptune-orbit">
-            <div class="planet neptune" data-planet="neptune">
-                <div class="tooltip">
+            <div class="planet neptune">
+                <div class="planet-info">
                     <h3>Neptune</h3>
-                    <p>Windiest planet<br>Temperature: -200°C<br>Distance from Sun: 4.5B km</p>
+                    <p>Windiest planet<br>
+                    Distance: 4.5B km<br>
+                    Temperature: -200°C avg</p>
                 </div>
             </div>
         </div>
