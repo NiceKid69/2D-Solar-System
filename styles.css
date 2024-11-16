@@ -1,0 +1,196 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.solar-system {
+    position: relative;
+    width: 100vmin;
+    height: 100vmin;
+}
+
+.sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20vmin;
+    height: 20vmin;
+    background: radial-gradient(#ffd700, #ff4500);
+    border-radius: 50%;
+    box-shadow: 0 0 10vmin #ff4500;
+    animation: glow 4s ease-in-out infinite;
+}
+
+.orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.planet {
+    position: absolute;
+    top: -0.5vmin;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+}
+
+/* Planet sizes and colors */
+.mercury {
+    width: 1.5vmin;
+    height: 1.5vmin;
+    background: #888;
+}
+
+.venus {
+    width: 2vmin;
+    height: 2vmin;
+    background: #e6b800;
+}
+
+.earth {
+    width: 2.2vmin;
+    height: 2.2vmin;
+    background: #4b9cd3;
+}
+
+.mars {
+    width: 1.8vmin;
+    height: 1.8vmin;
+    background: #c1440e;
+}
+
+.jupiter {
+    width: 4vmin;
+    height: 4vmin;
+    background: #e0ae6f;
+}
+
+.saturn {
+    width: 3.5vmin;
+    height: 3.5vmin;
+    background: #f4d03f;
+}
+
+.uranus {
+    width: 3vmin;
+    height: 3vmin;
+    background: #73c2fb;
+}
+
+.neptune {
+    width: 2.8vmin;
+    height: 2.8vmin;
+    background: #3498db;
+}
+
+/* Orbit sizes */
+.mercury-orbit { width: 30vmin; height: 30vmin; }
+.venus-orbit { width: 40vmin; height: 40vmin; }
+.earth-orbit { width: 50vmin; height: 50vmin; }
+.mars-orbit { width: 60vmin; height: 60vmin; }
+.jupiter-orbit { width: 70vmin; height: 70vmin; }
+.saturn-orbit { width: 80vmin; height: 80vmin; }
+.uranus-orbit { width: 90vmin; height: 90vmin; }
+.neptune-orbit { width: 95vmin; height: 95vmin; }
+
+/* Orbit animations */
+@keyframes orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.mercury-orbit { animation: orbit 8.8s linear infinite; }
+.venus-orbit { animation: orbit 22.5s linear infinite; }
+.earth-orbit { animation: orbit 36.5s linear infinite; }
+.mars-orbit { animation: orbit 68.7s linear infinite; }
+.jupiter-orbit { animation: orbit 433.2s linear infinite; }
+.saturn-orbit { animation: orbit 1075.5s linear infinite; }
+.uranus-orbit { animation: orbit 3066.4s linear infinite; }
+.neptune-orbit { animation: orbit 6010.2s linear infinite; }
+
+/* Moon */
+.moon-orbit {
+    position: absolute;
+    width: 4vmin;
+    height: 4vmin;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: orbit 2.7s linear infinite;
+}
+
+.moon {
+    position: absolute;
+    top: -0.3vmin;
+    left: 50%;
+    width: 0.6vmin;
+    height: 0.6vmin;
+    background: #ccc;
+    border-radius: 50%;
+    transform: translateX(-50%);
+}
+
+/* Saturn's rings */
+.rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 7vmin;
+    height: 2vmin;
+    background: rgba(244, 208, 63, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%) rotateX(75deg);
+}
+
+/* Tooltips */
+.tooltip {
+    position: absolute;
+    top: -5vmin;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1vmin;
+    border-radius: 0.5vmin;
+    width: max-content;
+    color: #000;
+    font-size: 1.2vmin;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+.planet:hover .tooltip {
+    opacity: 1;
+}
+
+/* Sun glow animation */
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 10vmin #ff4500; }
+    50% { box-shadow: 0 0 15vmin #ff4500; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .solar-system {
+        width: 90vmin;
+        height: 90vmin;
+    }
+    
+    .tooltip {
+        font-size: 2vmin;
+    }
+}
