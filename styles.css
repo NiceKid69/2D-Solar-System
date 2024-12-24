@@ -47,20 +47,22 @@ body {
 .planet {
     position: absolute;
     border-radius: 50%;
+    top: 50%;
+    transform-origin: 50% -75px;
 }
 
-.mercury { width: 10px; height: 10px; background-color: gray; top: 50%; left: 100%; margin-top: -5px; }
-.venus { width: 15px; height: 15px; background-color: orange; top: 50%; left: 100%; margin-top: -7.5px; }
-.earth { width: 20px; height: 20px; background-color: blue; top: 50%; left: 100%; margin-top: -10px; }
-.mars { width: 15px; height: 15px; background-color: red; top: 50%; left: 100%; margin-top: -7.5px; }
-.jupiter { width: 35px; height: 35px; background-color: brown; top: 50%; left: 100%; margin-top: -17.5px; }
-.saturn { width: 30px; height: 30px; background-color: gold; top: 50%; left: 100%; margin-top: -15px; }
-.uranus { width: 25px; height: 25px; background-color: lightblue; top: 50%; left: 100%; margin-top: -12.5px; }
-.neptune { width: 25px; height: 25px; background-color: darkblue; top: 50%; left: 100%; margin-top: -12.5px; }
+.mercury { width: 10px; height: 10px; background-color: gray; }
+.venus { width: 15px; height: 15px; background-color: orange; }
+.earth { width: 20px; height: 20px; background-color: blue; }
+.mars { width: 15px; height: 15px; background-color: red; }
+.jupiter { width: 35px; height: 35px; background-color: brown; }
+.saturn { width: 30px; height: 30px; background-color: gold; }
+.uranus { width: 25px; height: 25px; background-color: lightblue; }
+.neptune { width: 25px; height: 25px; background-color: darkblue; }
 
 @keyframes orbit {
-    0% { transform: rotate(0deg) translateX(-50%) rotate(0deg); }
-    100% { transform: rotate(360deg) translateX(-50%) rotate(-360deg); }
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 @keyframes rotateSun {
