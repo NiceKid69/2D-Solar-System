@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const info = e.target.getAttribute('data-info');
             tooltip.textContent = info;
             tooltip.style.display = 'block';
-            tooltip.style.left = `${e.pageX}px`;
-            tooltip.style.top = `${e.pageY}px`;
+            tooltip.style.left = `${e.pageX + 10}px`; // Adjusted positioning for better visibility
+            tooltip.style.top = `${e.pageY + 10}px`;
         });
 
         planet.addEventListener('mousemove', (e) => {
-            tooltip.style.left = `${e.pageX}px`;
-            tooltip.style.top = `${e.pageY}px`;
+            tooltip.style.left = `${e.pageX + 10}px`; // Adjusted positioning for better visibility
+            tooltip.style.top = `${e.pageY + 10}px`;
         });
 
         planet.addEventListener('mouseout', () => {
