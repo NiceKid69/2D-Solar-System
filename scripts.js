@@ -1,141 +1,256 @@
-/*
- * script.js
- * This file contains the JavaScript logic for the 2D solar system simulation.
- */
+// --- JavaScript Code (script.js) ---
 
-// Get the canvas and its 2D rendering context
-const canvas = document.getElementById('solar-system-canvas');
-const ctx = canvas.getContext('2d');
+        // Get the canvas and 2D context
+        const canvas = document.getElementById('solarSystemCanvas');
+        const ctx = canvas.getContext('2d');
 
-// Global variables for canvas dimensions and scale
-let canvasWidth, canvasHeight;
-let scale;
-let animationFrameId;
+        // Define simulation parameters
+        let speedMultiplier = 1;
+        let isPaused = false;
+        let scale = 1;
+        const orbitScale = 1; // Used to adjust orbit sizes
 
-// Class to define a celestial object (planet, moon, or sun)
-class CelestialObject {
-    constructor(name, radius, distance, color, speed) {
-        this.name = name;
-        this.radius = radius;
-        this.distance = distance;
-        this.color = color;
-        this.speed = speed;
-        this.angle = Math.random() * Math.PI * 2; // Start at a random angle
-        this.x = 0;
-        this.y = 0;
-    }
+        // Define celestial objects with their properties
+        const celestialObjects = {
+            sun: {
+                radius: 30,
+                color: 'var(--sun-color)'
+            },
+            planets: [{
+                name: 'Mercury',
+                color: 'var(--mercury-color)',
+                radius: 3,
+                distance: 50,
+                speed: 4.79
+            }, {
+                name: 'Venus',
+                color: 'var(--venus-color)',
+                radius: 6,
+                distance: 75,
+                speed: 3.50
+            }, {
+                name: 'Earth',
+                color: 'var(--earth-color)',
+                radius: 7,
+                distance: 100,
+                speed: 2.98,
+                hasMoon: true,
+                moon: {
+                    radius: 2,
+                    distance: 15,
+                    color: 'var(--moon-color)',
+                    speed: 1.02
+                }
+            }, {
+                name: 'Mars',
+                color: 'var(--mars-color)',
+                radius: 4,
+                distance: 150,
+                speed: 2.41
+            }, {
+                name: 'Jupiter',
+                color: 'var(--jupiter-color)',
+                radius: 15,
+                distance: 220,
+                speed: 1.31
+            }, {
+                name: 'Saturn',
+                color: 'var(--saturn-color)',
+                radius: 12,
+                distance: 280,
+                speed: 0.97
+            }, {
+                name: 'Uranus',
+                color: 'var(--uranus-color)',
+                radius: 10,
+                distance: 350,
+                speed: 0.68
+            }, {
+                name: 'Neptune',
+                color: 'var(--neptune-color)',
+                radius: 10,
+                distance: 420,
+                speed: 0.54
+            }],
+            asteroidBelt: {
+                minDistance: 170,
+                maxDistance: 200,
+                count: 300,
+                color: 'var(--belt-color)'
+            },
+            kuiperBelt: {
+                minDistance: 450,
+                maxDistance: 500,
+                count: 500,
+                color: 'var(--belt-color)'
+            }
+        };
 
-    // Update the position of the object
-    update(deltaTime) {
-        this.angle += this.speed * deltaTime;
-        const orbitRadius = this.distance * scale;
-        this.x = Math.cos(this.angle) * orbitRadius;
-        this.y = Math.sin(this.angle) * orbitRadius;
-    }
+        // Initialize angles for each planet and the moon
+        celestialObjects.planets.forEach(planet => {
+            planet.angle = Math.random() * Math.PI * 2;
+            if (planet.hasMoon) {
+                planet.moon.angle = Math.random() * Math.PI * 2;
+            }
+        });
 
-    // Draw the object on the canvas
-    draw(parentX, parentY) {
-        ctx.save();
-        ctx.translate(canvasWidth / 2, canvasHeight / 2); // Center of the canvas
-        ctx.translate(parentX, parentY);
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * scale, 0, Math.PI * 2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-
-        ctx.restore();
-    }
-}
-
-// Function to generate and draw a belt of objects (e.g., asteroids, Kuiper Belt)
-function drawBelt(minDist, maxDist, count, color) {
-    ctx.save();
-    ctx.translate(canvasWidth / 2, canvasHeight / 2);
-
-    for (let i = 0; i < count; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const dist = Math.random() * (maxDist - minDist) + minDist;
-        const x = Math.cos(angle) * (dist * scale);
-        const y = Math.sin(angle) * (dist * scale);
-
-        ctx.beginPath();
-        ctx.arc(x, y, 0.5 * scale, 0, Math.PI * 2); // Tiny circles for asteroids
-        ctx.fillStyle = color;
-        ctx.fill();
-    }
-    
-    ctx.restore();
-}
-
-// Define the celestial objects with their properties
-// Distances are in arbitrary units, speeds are relative to orbital periods
-const sun = new CelestialObject('Sun', 20, 0, '#FFC300', 0);
-const planets = [
-    new CelestialObject('Mercury', 3, 40, '#B3A19C', 0.05),
-    new CelestialObject('Venus', 4, 60, '#E6D8A9', 0.03),
-    new CelestialObject('Earth', 5, 85, '#2D729C', 0.02),
-    new CelestialObject('Mars', 4, 110, '#C1440E', 0.015),
-    new CelestialObject('Jupiter', 15, 180, '#C78F56', 0.008),
-    new CelestialObject('Saturn', 12, 250, '#E0BF9C', 0.005),
-    new CelestialObject('Uranus', 10, 320, '#A7B7BB', 0.003),
-    new CelestialObject('Neptune', 10, 380, '#4A5087', 0.002)
-];
-const moon = new CelestialObject('Moon', 2, 10, '#888888', 0.2); // Relative to Earth
-
-let lastTime = 0;
-
-// The main animation loop
-function animate(currentTime) {
-    // Calculate the time elapsed since the last frame
-    const deltaTime = (currentTime - lastTime) / 1000; // in seconds
-    lastTime = currentTime;
-
-    // Clear the canvas
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    
-    // Draw the sun at the center
-    sun.draw(0, 0);
-
-    // Update and draw the asteroid belt
-    drawBelt(120, 160, 500, '#6B543F'); // Asteroid belt between Mars and Jupiter
-
-    // Update and draw each planet
-    planets.forEach(planet => {
-        planet.update(deltaTime);
-        planet.draw(0, 0);
-        
-        // If the planet is Earth, draw its moon
-        if (planet.name === 'Earth') {
-            moon.update(deltaTime * 10); // Moon orbits faster
-            moon.draw(planet.x, planet.y);
+        /**
+         * Resizes the canvas and recalculates the scale to fit the window.
+         */
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            // Calculate scale based on the smaller dimension to ensure everything fits
+            scale = Math.min(canvas.width, canvas.height) / 1000;
         }
-    });
-    
-    // Draw the Kuiper Belt (further out, less dense)
-    drawBelt(400, 450, 300, '#424242');
 
-    // Request the next animation frame
-    animationFrameId = requestAnimationFrame(animate);
-}
+        /**
+         * Draws an object (sun, planet, or moon) on the canvas.
+         * @param {number} x - The x-coordinate.
+         * @param {number} y - The y-coordinate.
+         * @param {number} radius - The radius of the object.
+         * @param {string} color - The color of the object.
+         */
+        function drawObject(x, y, radius, color) {
+            ctx.beginPath();
+            ctx.arc(x, y, radius * scale, 0, Math.PI * 2);
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
 
-// Function to resize the canvas and recalculate the scale
-function resizeCanvas() {
-    canvasWidth = window.innerWidth;
-    canvasHeight = window.innerHeight;
-    canvas.width = canvasWidth;
-    canvas.height = canvasHeight;
+        /**
+         * Draws a line representing an orbit.
+         * @param {number} distance - The distance from the center.
+         * @param {string} color - The color of the orbit line.
+         */
+        function drawOrbit(distance, color) {
+            ctx.beginPath();
+            ctx.arc(0, 0, distance * orbitScale * scale, 0, Math.PI * 2);
+            ctx.strokeStyle = color;
+            ctx.stroke();
+        }
 
-    // Calculate a new scale based on the smaller of the two dimensions
-    scale = Math.min(canvasWidth, canvasHeight) / 800;
-    
-    // Restart the animation loop to apply the new scale
-    if (animationFrameId) {
-        cancelAnimationFrame(animationFrameId);
-    }
-    animate(0); // Pass 0 to reset deltaTime for the new loop
-}
+        /**
+         * Draws the asteroid belt with multiple small particles.
+         * @param {object} belt - The belt object with its properties.
+         */
+        function drawBelt(belt) {
+            ctx.fillStyle = belt.color;
+            for (let i = 0; i < belt.count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const distance = belt.minDistance + (Math.random() * (belt.maxDistance - belt.minDistance));
+                const x = Math.cos(angle) * distance * orbitScale * scale;
+                const y = Math.sin(angle) * distance * orbitScale * scale;
+                ctx.beginPath();
+                ctx.arc(x, y, 0.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
 
-// Initial setup and event listeners
-window.onload = resizeCanvas;
-window.onresize = resizeCanvas;
+        /**
+         * The main drawing function that renders all celestial objects.
+         */
+        function draw() {
+            // Clear the canvas
+            ctx.fillStyle = 'var(--bg-color)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Translate the canvas to the center for easier drawing
+            ctx.save();
+            ctx.translate(canvas.width / 2, canvas.height / 2);
+
+            // Draw the Sun
+            drawObject(0, 0, celestialObjects.sun.radius, celestialObjects.sun.color);
+
+            // Draw planets, their orbits, and the moon
+            celestialObjects.planets.forEach(planet => {
+                // Draw planet orbit line
+                drawOrbit(planet.distance, 'var(--orbit-color)');
+
+                // Calculate planet position
+                const planetX = Math.cos(planet.angle) * planet.distance * orbitScale * scale;
+                const planetY = Math.sin(planet.angle) * planet.distance * orbitScale * scale;
+
+                // Draw the planet
+                drawObject(planetX, planetY, planet.radius, planet.color);
+
+                // If the planet has a moon, draw its orbit and the moon itself
+                if (planet.hasMoon) {
+                    ctx.save();
+                    ctx.translate(planetX, planetY);
+                    
+                    // Draw the moon orbit line
+                    ctx.beginPath();
+                    ctx.arc(0, 0, planet.moon.distance * scale, 0, Math.PI * 2);
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+                    ctx.stroke();
+
+                    // Calculate moon position
+                    const moonX = Math.cos(planet.moon.angle) * planet.moon.distance * scale;
+                    const moonY = Math.sin(planet.moon.angle) * planet.moon.distance * scale;
+
+                    // Draw the moon
+                    drawObject(moonX, moonY, planet.moon.radius, planet.moon.color);
+
+                    ctx.restore();
+                }
+            });
+
+            // Draw the asteroid belt between Mars and Jupiter
+            drawBelt(celestialObjects.asteroidBelt);
+
+            // Draw the Kuiper belt at the outer edge
+            drawBelt(celestialObjects.kuiperBelt);
+
+            // Restore the canvas state
+            ctx.restore();
+        }
+
+        /**
+         * Updates the position of all celestial objects.
+         */
+        function update() {
+            if (isPaused) return;
+
+            // Update planet and moon angles
+            celestialObjects.planets.forEach(planet => {
+                planet.angle += (planet.speed / 1000) * speedMultiplier;
+                if (planet.hasMoon) {
+                    planet.moon.angle += (planet.moon.speed / 10) * speedMultiplier;
+                }
+            });
+        }
+
+        /**
+         * The main animation loop.
+         */
+        function gameLoop() {
+            update();
+            draw();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Event listeners for controls
+        const speedUpBtn = document.getElementById('speedUpBtn');
+        const slowDownBtn = document.getElementById('slowDownBtn');
+        const toggleBtn = document.getElementById('toggleBtn');
+
+        speedUpBtn.addEventListener('click', () => {
+            speedMultiplier = Math.min(speedMultiplier + 0.5, 3);
+        });
+
+        slowDownBtn.addEventListener('click', () => {
+            speedMultiplier = Math.max(speedMultiplier - 0.5, 0);
+        });
+
+        toggleBtn.addEventListener('click', () => {
+            isPaused = !isPaused;
+            toggleBtn.textContent = isPaused ? 'Resume' : 'Pause';
+        });
+
+        // Event listener for window resize
+        window.addEventListener('resize', resizeCanvas);
+
+        // Initial setup
+        resizeCanvas();
+        gameLoop();
