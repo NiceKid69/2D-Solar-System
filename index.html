@@ -3,38 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Advanced 2D Solar System</title>
+    <title>2D Solar System</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="solar-system">
-        <div class="sun" data-info="Sun: The star at the center of our solar system"></div>
-        <div class="orbit mercury-orbit">
-            <div class="planet mercury" data-info="Mercury: The smallest planet in our solar system"></div>
-        </div>
-        <div class="orbit venus-orbit">
-            <div class="planet venus" data-info="Venus: The hottest planet in our solar system"></div>
-        </div>
-        <div class="orbit earth-orbit">
-            <div class="planet earth" data-info="Earth: Our home planet"></div>
-        </div>
-        <div class="orbit mars-orbit">
-            <div class="planet mars" data-info="Mars: Known as the Red Planet"></div>
-        </div>
-        <div class="orbit jupiter-orbit">
-            <div class="planet jupiter" data-info="Jupiter: The largest planet in our solar system"></div>
-        </div>
-        <div class="orbit saturn-orbit">
-            <div class="planet saturn" data-info="Saturn: Famous for its rings"></div>
-        </div>
-        <div class="orbit uranus-orbit">
-            <div class="planet uranus" data-info="Uranus: Has a unique sideways rotation"></div>
-        </div>
-        <div class="orbit neptune-orbit">
-            <div class="planet neptune" data-info="Neptune: Known for its strong winds"></div>
-        </div>
-    </div>
-    <div id="tooltip" class="tooltip"></div>
+    <div class="loading-text" id="loadingText">Loading Solar System...</div>
+    <canvas id="solarSystemCanvas"></canvas>
     <script src="scripts.js"></script>
 </body>
 </html>
